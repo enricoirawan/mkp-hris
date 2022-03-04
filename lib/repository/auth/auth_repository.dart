@@ -159,7 +159,10 @@ class AuthRepository extends BaseAuthRepository {
 
   @override
   Future<bool> uploadImageProfile(
-      Uint8List bytes, String filePath, int karyawanId) async {
+    Uint8List bytes,
+    String filePath,
+    int karyawanId,
+  ) async {
     try {
       final uploadResponse = await _supabaseClient.storage
           .from("karyawan-photo")

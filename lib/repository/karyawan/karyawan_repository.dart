@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:mkp_hris/model/model.dart';
 import 'package:mkp_hris/utils/geolocator_helper.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -262,6 +264,70 @@ class KaryawanRepository extends BaseKaryawanRepository {
         final prefs = await SharedPreferences.getInstance();
         await prefs.setBool("isAlredyCheckIn", false);
 
+        return true;
+      }
+
+      return false;
+    } catch (e) {
+      throw e.toString();
+    }
+  }
+
+  @override
+  Future<List?> getAnnouncement() async {
+    try {
+      PostgrestResponse response =
+          await _supabaseClient.from("Pengumuman").select().execute();
+
+      if (response.error == null) {
+        return response.data as List;
+      }
+
+      return null;
+    } catch (e) {
+      throw e.toString();
+    }
+  }
+
+  @override
+  Future<bool> createAnnouncement(
+    String title,
+    String description,
+    String createdBy,
+    String createdAt, {
+    File? file,
+    String filePath = "",
+  }) async {
+    try {
+      String attachmentUrl = "";
+      if (file != null) {
+        //logic upload file
+        final uploadResponse = await _supabaseClient.storage
+            .from("pengumuman-file")
+            .upload(filePath, file);
+
+        if (uploadResponse.error == null) {
+          final imageUrlResponse = _supabaseClient.storage
+              .from('pengumuman-file')
+              .getPublicUrl(filePath);
+
+          attachmentUrl = imageUrlResponse.data!;
+        } else {
+          return false;
+        }
+      }
+
+      //logic insert data to table
+      PostgrestResponse response =
+          await _supabaseClient.from("Pengumuman").insert({
+        "title": title,
+        "created_at": createdAt,
+        "created_by": createdBy,
+        "detail": description,
+        "attachment_url": attachmentUrl
+      }).execute();
+
+      if (response.error == null) {
         return true;
       }
 

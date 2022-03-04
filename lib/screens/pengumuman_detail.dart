@@ -1,9 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:mkp_hris/model/model.dart';
+import 'package:mkp_hris/widgets/widgets.dart';
 
+import '../utils/lib.dart';
 import '../utils/theme.dart';
 
 class PengumumanDetail extends StatelessWidget {
-  const PengumumanDetail({Key? key}) : super(key: key);
+  final PengumumanModel pengumumanModel;
+  const PengumumanDetail({Key? key, required this.pengumumanModel})
+      : super(key: key);
+
+  void _onDownloadAttachment(String url, BuildContext context) async {
+    if (!await launch(url)) {
+      CustomSnackbar.buildErrorSnackbar(context, "Tidak bisa membuka link");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +42,7 @@ class PengumumanDetail extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Text(
-                    "Judul Pengumuman",
+                    pengumumanModel.title,
                     style: blackTextStyle.copyWith(
                       fontSize: 20,
                       color: kWhiteColor,
@@ -43,7 +54,7 @@ class PengumumanDetail extends StatelessWidget {
                     height: 5,
                   ),
                   Text(
-                    "By Enrico Irawan - 01/01/2022",
+                    "By ${pengumumanModel.createdBy} - ${pengumumanModel.createdAt}",
                     style: blackTextStyle.copyWith(
                       color: kWhiteColor,
                       letterSpacing: 1.5,
@@ -60,7 +71,7 @@ class PengumumanDetail extends StatelessWidget {
                 child: Container(
                   padding: const EdgeInsets.all(10),
                   child: Text(
-                    'Detail Pengumuman',
+                    pengumumanModel.detail,
                     style: blackTextStyle.copyWith(
                       letterSpacing: 1.5,
                     ),
@@ -69,6 +80,18 @@ class PengumumanDetail extends StatelessWidget {
               ),
             ),
             // *End Detail Pengumuman
+
+            pengumumanModel.attachmentUrl.isEmpty
+                ? const SizedBox()
+                : TextButton.icon(
+                    onPressed: () => _onDownloadAttachment(
+                        pengumumanModel.attachmentUrl, context),
+                    icon: const Icon(Icons.attach_file),
+                    label: Text(
+                      "Dokumen",
+                      style: primaryTextStyle,
+                    ),
+                  ),
 
             // *Start Button Back
             Container(

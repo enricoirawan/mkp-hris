@@ -8,3 +8,4 @@ export 'absen.dart';
 export 'forgot_password.dart';
 export 'profil.dart';
 export 'pengumuman_detail.dart';
+export 'buat_pengumuman.dart';

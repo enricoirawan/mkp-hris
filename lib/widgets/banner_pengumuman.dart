@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:mkp_hris/model/model.dart';
 import 'package:mkp_hris/router.dart';
 
 import '../utils/lib.dart';
 import '../utils/theme.dart';
 
 class BannerPengumuman extends StatelessWidget {
-  const BannerPengumuman({Key? key}) : super(key: key);
+  final List<PengumumanModel> listPengumuman;
+  const BannerPengumuman({Key? key, required this.listPengumuman})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +16,10 @@ class BannerPengumuman extends StatelessWidget {
       itemBuilder: (BuildContext context, int index) {
         return InkWell(
           onTap: () {
-            Navigator.of(context).pushNamed(detailPengumumanPageRoute);
+            Navigator.of(context).pushNamed(
+              detailPengumumanPageRoute,
+              arguments: listPengumuman[index],
+            );
           },
           child: Container(
             padding: const EdgeInsets.all(10),
@@ -31,7 +37,7 @@ class BannerPengumuman extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
-                  "Judul Pengumuman",
+                  listPengumuman[index].title,
                   style: blackTextStyle.copyWith(
                     fontSize: 20,
                     color: kWhiteColor,
@@ -43,7 +49,7 @@ class BannerPengumuman extends StatelessWidget {
                   height: 5,
                 ),
                 Text(
-                  "By Enrico Irawan - 01/01/2022",
+                  "${listPengumuman[index].createdBy} - ${listPengumuman[index].createdAt}",
                   style: blackTextStyle.copyWith(
                     color: kWhiteColor,
                     letterSpacing: 1.5,
@@ -54,7 +60,7 @@ class BannerPengumuman extends StatelessWidget {
           ),
         );
       },
-      itemCount: 2,
+      itemCount: listPengumuman.length,
       viewportFraction: 0.8,
       scale: 0.9,
     );

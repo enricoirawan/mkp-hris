@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:mkp_hris/model/model.dart';
 
 abstract class BaseKaryawanRepository {
@@ -22,4 +24,13 @@ abstract class BaseKaryawanRepository {
     String waktuCheckOut,
     String tanggalAbsensi,
   );
+  Future<List?> getAnnouncement();
+  Future<bool> createAnnouncement(
+    String title,
+    String description,
+    String createdBy,
+    String createdAt, {
+    File file,
+    String filePath,
+  });
 }

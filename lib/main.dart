@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mkp_hris/bloc/absensi/absensi_cubit.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:flutter/services.dart';
 
@@ -80,6 +79,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider<AbsensiCubit>(
           create: (_) => getIt.get<AbsensiCubit>(),
+        ),
+        BlocProvider<PengumumanCubit>(
+          create: (_) => getIt.get<PengumumanCubit>(),
         ),
       ],
       child: MaterialApp(

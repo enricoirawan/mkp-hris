@@ -1,5 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:mkp_hris/bloc/absensi/absensi_cubit.dart';
+import 'package:mkp_hris/bloc/pengumuman/pengumuman_cubit.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'package:mkp_hris/bloc/bloc.dart';
@@ -32,6 +33,13 @@ void setup() {
   );
   getIt.registerLazySingleton(
     () => AbsensiCubit(
+      karyawanRepository: KaryawanRepository(
+        supabaseClient: SupabaseClient(supabaseUrl, anonKey),
+      ),
+    ),
+  );
+  getIt.registerLazySingleton(
+    () => PengumumanCubit(
       karyawanRepository: KaryawanRepository(
         supabaseClient: SupabaseClient(supabaseUrl, anonKey),
       ),

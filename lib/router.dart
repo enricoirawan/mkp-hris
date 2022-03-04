@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mkp_hris/model/model.dart';
 import 'package:mkp_hris/screens/set_password.dart';
 import 'package:page_transition/page_transition.dart';
 import 'screens/screens.dart';
@@ -11,6 +12,7 @@ const String forgotPasswordPageRoute = "/forgotPassword";
 const String mainPageRoute = "/main";
 const String profilPageRoute = "/profil";
 const String detailPengumumanPageRoute = "/detailPengumuman";
+const String buatPengumumanPageRoute = "/buatPengumuman";
 
 class RouterGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -66,8 +68,21 @@ class RouterGenerator {
         );
 
       case detailPengumumanPageRoute:
+        final PengumumanModel pengumumanModelArgument =
+            settings.arguments as PengumumanModel;
+
         return PageTransition(
-          child: PengumumanDetail(),
+          child: PengumumanDetail(
+            pengumumanModel: pengumumanModelArgument,
+          ),
+          type: PageTransitionType.fade,
+        );
+
+      case buatPengumumanPageRoute:
+        final String namaArgument = settings.arguments as String;
+
+        return PageTransition(
+          child: BuatPengumuman(nama: namaArgument),
           type: PageTransitionType.fade,
         );
 
