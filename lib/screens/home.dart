@@ -72,16 +72,35 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   // *End Berita
 
+                  const Divider(),
+
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      top: 5,
+                      bottom: 3,
+                      right: 20,
+                      left: 20,
+                    ),
+                    child: Text(
+                      "Menu Karyawan",
+                      style: blackTextStyle.copyWith(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                      ),
+                    ),
+                  ),
                   // *Start Grid List Menu
                   Container(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 10,
-                      horizontal: 15,
+                    padding: const EdgeInsets.only(
+                      top: 10,
+                      left: 15,
+                      right: 15,
                     ),
-                    height: 120,
+                    height: state.karyawan.roleId == 3 ? 190 : 120,
                     child: GridView.count(
+                      shrinkWrap: true,
                       crossAxisSpacing: 20,
-                      crossAxisCount: 3,
+                      crossAxisCount: state.karyawan.roleId == 3 ? 2 : 3,
                       children: [
                         Card(
                           elevation: 10,
@@ -123,30 +142,53 @@ class _HomeScreenState extends State<HomeScreen> {
                             ],
                           ),
                         ),
-                        Card(
-                          elevation: 10,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.asset("assets/upload.png"),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                "Berkas Data",
-                                style: primaryTextStyle.copyWith(
-                                  letterSpacing: 1,
-                                  fontSize: 12,
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
+                        // InkWell(
+                        //   onTap: () {},
+                        //   child: Card(
+                        //     elevation: 10,
+                        //     child: Column(
+                        //       crossAxisAlignment: CrossAxisAlignment.center,
+                        //       mainAxisAlignment: MainAxisAlignment.center,
+                        //       children: [
+                        //         Image.asset("assets/commercial.png"),
+                        //         const SizedBox(
+                        //           height: 10,
+                        //         ),
+                        //         Text(
+                        //           "Pengumuman",
+                        //           style: primaryTextStyle.copyWith(
+                        //             letterSpacing: 1,
+                        //             fontSize: 12,
+                        //           ),
+                        //         )
+                        //       ],
+                        //     ),
+                        //   ),
+                        // ),
                       ],
                     ),
                   ),
                   // *End Grid List Menu
+
+                  const Divider(),
+
+                  state.karyawan.roleId == 3
+                      ? const SizedBox()
+                      : Padding(
+                          padding: const EdgeInsets.only(
+                            top: 5,
+                            bottom: 3,
+                            right: 20,
+                            left: 20,
+                          ),
+                          child: Text(
+                            "Menu HR",
+                            style: blackTextStyle.copyWith(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                            ),
+                          ),
+                        ),
 
                   state.karyawan.roleId == 3
                       ? const SizedBox()
@@ -154,9 +196,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       // *Start Grid List Menu HR
                       Container(
                           padding: const EdgeInsets.symmetric(
-                              vertical: 5, horizontal: 15),
-                          height: MediaQuery.of(context).size.height,
+                            vertical: 5,
+                            horizontal: 15,
+                          ),
+                          height: 215,
                           child: GridView.count(
+                            shrinkWrap: true,
                             crossAxisSpacing: 20,
                             crossAxisCount: 3,
                             children: [
@@ -206,24 +251,31 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ],
                                 ),
                               ),
-                              Card(
-                                elevation: 10,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Image.asset("assets/employees.png"),
-                                    const SizedBox(
-                                      height: 10,
-                                    ),
-                                    Text(
-                                      "Karyawan",
-                                      style: primaryTextStyle.copyWith(
-                                        letterSpacing: 1,
-                                        fontSize: 12,
+                              InkWell(
+                                onTap: () {
+                                  Navigator.of(context)
+                                      .pushNamed(karyawanPageRoute);
+                                },
+                                child: Card(
+                                  elevation: 10,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset("assets/employees.png"),
+                                      const SizedBox(
+                                        height: 10,
                                       ),
-                                    )
-                                  ],
+                                      Text(
+                                        "Karyawan",
+                                        style: primaryTextStyle.copyWith(
+                                          letterSpacing: 1,
+                                          fontSize: 12,
+                                        ),
+                                      )
+                                    ],
+                                  ),
                                 ),
                               ),
                               InkWell(
@@ -269,6 +321,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                   // *End Grid List Menu HR
+                  state.karyawan.roleId == 3
+                      ? const SizedBox()
+                      : const Divider(),
                 ],
               ),
             );

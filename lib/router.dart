@@ -13,6 +13,10 @@ const String mainPageRoute = "/main";
 const String profilPageRoute = "/profil";
 const String detailPengumumanPageRoute = "/detailPengumuman";
 const String buatPengumumanPageRoute = "/buatPengumuman";
+const String karyawanPageRoute = "/karyawan";
+const String detailKaryawanPageRoute = "/detailKaryawan";
+const String addKaryawanPageRoute = "/addKaryawan";
+const String updateKaryawanPageRoute = "/updateKaryawan";
 
 class RouterGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -83,6 +87,36 @@ class RouterGenerator {
 
         return PageTransition(
           child: BuatPengumuman(nama: namaArgument),
+          type: PageTransitionType.fade,
+        );
+
+      case karyawanPageRoute:
+        return PageTransition(
+          child: const KaryawanScreen(),
+          type: PageTransitionType.fade,
+        );
+
+      case detailKaryawanPageRoute:
+        final KaryawanModel karyawanArgument =
+            settings.arguments as KaryawanModel;
+
+        return PageTransition(
+          child: DetailKaryawanScreen(karyawan: karyawanArgument),
+          type: PageTransitionType.fade,
+        );
+
+      case addKaryawanPageRoute:
+        return PageTransition(
+          child: const AddKaryawanScreen(),
+          type: PageTransitionType.fade,
+        );
+
+      case updateKaryawanPageRoute:
+        final KaryawanModel karyawanArgument =
+            settings.arguments as KaryawanModel;
+
+        return PageTransition(
+          child: UpdateKaryawanScreen(karyawan: karyawanArgument),
           type: PageTransitionType.fade,
         );
 

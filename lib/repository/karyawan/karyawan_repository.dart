@@ -14,53 +14,80 @@ class KaryawanRepository extends BaseKaryawanRepository {
       : _supabaseClient = supabaseClient;
 
   @override
-  Future<void> getAllKaryawan() async {
-    try {
-      final response = await _supabaseClient
-          .from("Karyawan")
-          .select()
-          // .neq("role_id", 1)
-          .execute();
-
-      print(response.data);
-    } catch (e) {
-      throw e.toString();
-    }
-  }
-
-  @override
-  Future<void> insertKaryawan() async {
+  Future<List<KaryawanModel>?> getAllKaryawan() async {
     try {
       final response =
-          await _supabaseClient.from("Karyawan").insert({}).execute();
+          await _supabaseClient.from("Karyawan").select().execute();
 
-      print(response.data);
+      if (response.error == null) {
+        final List responseData = response.data as List;
+        List<KaryawanModel> listKaryawan = [];
+
+        for (var element in responseData) {
+          listKaryawan.add(KaryawanModel.fromMap(element));
+        }
+
+        return listKaryawan;
+      }
+
+      return null;
     } catch (e) {
       throw e.toString();
     }
   }
 
   @override
-  Future<void> updateKaryawan(int karyawanId, KaryawanModel karyawan) async {
+  Future<bool> addKaryawan(KaryawanModel karyawan) async {
     try {
       final response = await _supabaseClient
           .from("Karyawan")
-          .update({})
-          .eq("", "")
+          .insert(karyawan.toMap())
           .execute();
 
-      print(response.data);
+      if (response.error == null) {
+        return true;
+      }
+      return false;
     } catch (e) {
       throw e.toString();
     }
   }
 
   @override
-  Future<void> deleteKaryawan(int karyawanId) async {
-    final response =
-        await _supabaseClient.from("Karyawan").delete().eq("", "").execute();
+  Future<bool> updateKaryawan(int karyawanId, KaryawanModel karyawan) async {
+    try {
+      final response = await _supabaseClient
+          .from("Karyawan")
+          .update(karyawan.toMap())
+          .eq("id", karyawanId)
+          .execute();
 
-    print(response.data);
+      if (response.error == null) {
+        return true;
+      }
+      return false;
+    } catch (e) {
+      throw e.toString();
+    }
+  }
+
+  @override
+  Future<bool> deleteKaryawan(int karyawanId) async {
+    try {
+      final response = await _supabaseClient
+          .from("Karyawan")
+          .delete()
+          .eq("id", karyawanId)
+          .execute();
+
+      if (response.error == null) {
+        return true;
+      }
+
+      return false;
+    } catch (e) {
+      throw e.toString();
+    }
   }
 
   @override

@@ -3,10 +3,10 @@ import 'dart:io';
 import 'package:mkp_hris/model/model.dart';
 
 abstract class BaseKaryawanRepository {
-  Future<void> insertKaryawan();
-  Future<void> updateKaryawan(int karyawanId, KaryawanModel karyawan);
-  Future<void> deleteKaryawan(int karyawanId);
-  Future<void> getAllKaryawan();
+  Future<bool> addKaryawan(KaryawanModel karyawan);
+  Future<bool> updateKaryawan(int karyawanId, KaryawanModel karyawan);
+  Future<bool> deleteKaryawan(int karyawanId);
+  Future<List<KaryawanModel>?> getAllKaryawan();
   Future<KaryawanModel?> getKaryawanByIdKaryawan(int idKaryawan);
   Future<Map<String, dynamic>> getKaryawanByEmailForSetPasswordFirstTime(
     String email,

@@ -12,10 +12,10 @@ class KaryawanModel extends Equatable {
   final String jabatan;
   final String alamat;
   final String tanggalBergabung;
-  final int divisi;
+  final String divisi;
   final int roleId;
   final String noRekening;
-  final int sisaCuti;
+  final int jatahCuti;
   final bool active;
   final String errorMessage;
 
@@ -32,7 +32,7 @@ class KaryawanModel extends Equatable {
     required this.divisi,
     required this.roleId,
     required this.noRekening,
-    required this.sisaCuti,
+    required this.jatahCuti,
     required this.active,
     this.errorMessage = "",
   });
@@ -47,10 +47,10 @@ class KaryawanModel extends Equatable {
     String? jabatan,
     String? alamat,
     String? tanggalBergabung,
-    int? divisi,
+    String? divisi,
     int? roleId,
     String? noRekening,
-    int? sisaCuti,
+    int? jatahCuti,
     bool? active,
     String? errorMessage,
   }) {
@@ -67,7 +67,7 @@ class KaryawanModel extends Equatable {
       divisi: divisi ?? this.divisi,
       roleId: roleId ?? this.roleId,
       noRekening: noRekening ?? this.noRekening,
-      sisaCuti: sisaCuti ?? this.sisaCuti,
+      jatahCuti: jatahCuti ?? this.jatahCuti,
       active: active ?? this.active,
       errorMessage: errorMessage ?? this.errorMessage,
     );
@@ -75,21 +75,18 @@ class KaryawanModel extends Equatable {
 
   Map<String, dynamic> toMap() {
     return {
-      'id': id,
       'nama': nama,
       'email': email,
       'npwp': npwp,
       'gaji': gaji,
-      'foto_url': fotoUrl,
       'jabatan': jabatan,
       'alamat': alamat,
       'tanggal_bergabung': tanggalBergabung,
       'divisi': divisi,
       'role_id': roleId,
       'no_rekening': noRekening,
-      'sisa_cuti': sisaCuti,
-      'active': active,
-      'errorMessage': errorMessage,
+      'jatah_cuti': jatahCuti,
+      'active': true,
     };
   }
 
@@ -104,10 +101,10 @@ class KaryawanModel extends Equatable {
       jabatan: "",
       alamat: "",
       tanggalBergabung: "",
-      divisi: 0,
+      divisi: "",
       roleId: 0,
       noRekening: "",
-      sisaCuti: 0,
+      jatahCuti: 0,
       active: false,
     );
   }
@@ -123,10 +120,10 @@ class KaryawanModel extends Equatable {
       jabatan: map['jabatan'] ?? '',
       alamat: map['alamat'] ?? '',
       tanggalBergabung: map['tanggal_bergabung'] ?? '',
-      divisi: map['divisi']?.toInt() ?? 0,
+      divisi: map['divisi'] ?? "",
       roleId: map['role_id']?.toInt() ?? 0,
       noRekening: map['no_rekening'] ?? '',
-      sisaCuti: map['sisa_cuti'] ?? '',
+      jatahCuti: map['jatah_cuti'] ?? '',
       active: map['active'] ?? '',
       errorMessage: map['errorMessage'] ?? '',
     );
@@ -139,7 +136,7 @@ class KaryawanModel extends Equatable {
 
   @override
   String toString() {
-    return 'KaryawanModel(id: $id, nama: $nama, email: $email, npwp: $npwp, gaji: $gaji, fotoUrl: $fotoUrl, jabatan: $jabatan, alamat: $alamat, tanggalBergabung: $tanggalBergabung, divisi: $divisi, roleId: $roleId, noRekening: $noRekening, sisaCuti: $sisaCuti, active: $active)';
+    return 'KaryawanModel(id: $id, nama: $nama, email: $email, npwp: $npwp, gaji: $gaji, fotoUrl: $fotoUrl, jabatan: $jabatan, alamat: $alamat, tanggalBergabung: $tanggalBergabung, divisi: $divisi, roleId: $roleId, noRekening: $noRekening, jatahCuti: $jatahCuti, active: $active)';
   }
 
   @override
@@ -157,7 +154,7 @@ class KaryawanModel extends Equatable {
       divisi,
       roleId,
       noRekening,
-      sisaCuti,
+      jatahCuti,
       active,
       errorMessage
     ];

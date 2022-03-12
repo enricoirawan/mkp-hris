@@ -56,8 +56,7 @@ class AccountScreen extends StatelessWidget {
                           builder: (context, state) {
                             if (state is AuthSuccess) {
                               KaryawanModel karyawan = state.karyawan;
-                              String fotoUrl =
-                                  publicStorageBaseUrl + karyawan.fotoUrl;
+                              String fotoUrl = karyawan.fotoUrl;
 
                               if (fotoUrl.isEmpty) {
                                 //kalau foto url nya kosong tampilkan Icon saja
@@ -69,11 +68,13 @@ class AccountScreen extends StatelessWidget {
                               }
 
                               return ImageNetwork(
-                                image: fotoUrl,
+                                image: publicStorageBaseUrl + fotoUrl,
                                 height: 80,
                                 width: 80,
                                 borderRadius: BorderRadius.circular(50),
-                                imageCache: CachedNetworkImageProvider(fotoUrl),
+                                imageCache: CachedNetworkImageProvider(
+                                  publicStorageBaseUrl + fotoUrl,
+                                ),
                               );
                             }
                             return Icon(

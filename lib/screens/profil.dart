@@ -26,6 +26,7 @@ class _ProfilScreenState extends State<ProfilScreen> {
   final TextEditingController _alamatController = TextEditingController();
   final TextEditingController _npwpController = TextEditingController();
   final TextEditingController _noRekController = TextEditingController();
+  final TextEditingController _jatahCutiController = TextEditingController();
   final TextEditingController _tanggalBergabungController =
       TextEditingController();
 
@@ -178,6 +179,7 @@ class _ProfilScreenState extends State<ProfilScreen> {
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 15),
                       child: TextFormField(
+                        enabled: false,
                         keyboardType: TextInputType.emailAddress,
                         controller: _emailController..text = karyawan.email,
                         validator: (value) {
@@ -213,6 +215,7 @@ class _ProfilScreenState extends State<ProfilScreen> {
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 15),
                       child: TextFormField(
+                        enabled: false,
                         keyboardType: TextInputType.text,
                         controller: _jabatanController..text = karyawan.jabatan,
                         validator: (value) {
@@ -248,6 +251,7 @@ class _ProfilScreenState extends State<ProfilScreen> {
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 15),
                       child: TextFormField(
+                        enabled: false,
                         keyboardType: TextInputType.text,
                         controller: _alamatController..text = karyawan.alamat,
                         validator: (value) {
@@ -283,6 +287,7 @@ class _ProfilScreenState extends State<ProfilScreen> {
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 15),
                       child: TextFormField(
+                        enabled: false,
                         keyboardType: TextInputType.text,
                         controller: _npwpController..text = karyawan.npwp,
                         validator: (value) {
@@ -318,6 +323,7 @@ class _ProfilScreenState extends State<ProfilScreen> {
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 15),
                       child: TextFormField(
+                        enabled: false,
                         keyboardType: TextInputType.text,
                         controller: _noRekController
                           ..text = karyawan.noRekening,
@@ -354,6 +360,7 @@ class _ProfilScreenState extends State<ProfilScreen> {
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 15),
                       child: TextFormField(
+                        enabled: false,
                         keyboardType: TextInputType.text,
                         controller: _tanggalBergabungController
                           ..text = karyawan.tanggalBergabung,
@@ -382,6 +389,42 @@ class _ProfilScreenState extends State<ProfilScreen> {
                           errorStyle: redTextStyle,
                           hintText: "Tanggal bergabung",
                           label: const Text("Tanggal bergabung"),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 15),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 15),
+                      child: TextFormField(
+                        enabled: false,
+                        keyboardType: TextInputType.text,
+                        controller: _jatahCutiController
+                          ..text = karyawan.jatahCuti.toString(),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return '*Tanggal bergabung harus diisi';
+                          } else if (!value.contains("@")) {
+                            return "*Tanggal bergabung tidak valid";
+                          }
+                          return null;
+                        },
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(10),
+                            ),
+                            borderSide:
+                                BorderSide(color: kPrimaryColor, width: 2),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(10),
+                            ),
+                            borderSide: BorderSide(color: kRedColor, width: 2),
+                          ),
+                          errorStyle: redTextStyle,
+                          hintText: "Jatah Cuti",
+                          label: const Text("Jatah Cuti"),
                         ),
                       ),
                     ),

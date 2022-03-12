@@ -21,9 +21,9 @@ class PengumumanCubit extends Cubit<PengumumanState> {
       if (pengumumanList != null) {
         List<PengumumanModel> pengumumanData = [];
 
-        pengumumanList.forEach((pengumumanItem) {
+        for (var pengumumanItem in pengumumanList) {
           pengumumanData.add(PengumumanModel.fromMap(pengumumanItem));
-        });
+        }
 
         emit(GetPengumumanSuccess(listPengumuman: pengumumanData));
       } else {

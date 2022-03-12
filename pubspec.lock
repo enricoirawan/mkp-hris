@@ -120,13 +120,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.4"
-  dio:
-    dependency: "direct main"
-    description:
-      name: dio
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "4.0.4"
   equatable:
     dependency: "direct main"
     description:
@@ -583,6 +576,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.15"
+  rflutter_alert:
+    dependency: "direct main"
+    description:
+      name: rflutter_alert
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.4"
   rxdart:
     dependency: transitive
     description:
@@ -590,6 +590,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.27.3"
+  select_form_field:
+    dependency: "direct main"
+    description:
+      name: select_form_field
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.2.0"
   shared_preferences:
     dependency: "direct main"
     description:
