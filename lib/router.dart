@@ -17,6 +17,9 @@ const String karyawanPageRoute = "/karyawan";
 const String detailKaryawanPageRoute = "/detailKaryawan";
 const String addKaryawanPageRoute = "/addKaryawan";
 const String updateKaryawanPageRoute = "/updateKaryawan";
+const String inputGajiPageRoute = "/inputGaji";
+const String riwayatGajiPageRoute = "/riwayatGaji";
+const String inputGajiFormPageRoute = "/inputGajiForm";
 
 class RouterGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -117,6 +120,30 @@ class RouterGenerator {
 
         return PageTransition(
           child: UpdateKaryawanScreen(karyawan: karyawanArgument),
+          type: PageTransitionType.fade,
+        );
+
+      case inputGajiPageRoute:
+        return PageTransition(
+          child: const InputGajiScreen(),
+          type: PageTransitionType.fade,
+        );
+
+      case riwayatGajiPageRoute:
+        final KaryawanModel karyawanArgument =
+            settings.arguments as KaryawanModel;
+
+        return PageTransition(
+          child: RiwayatGajiKaryawan(karyawan: karyawanArgument),
+          type: PageTransitionType.fade,
+        );
+
+      case inputGajiFormPageRoute:
+        final KaryawanModel karyawanArgument =
+            settings.arguments as KaryawanModel;
+
+        return PageTransition(
+          child: InputgajiFormScreen(karyawan: karyawanArgument),
           type: PageTransitionType.fade,
         );
 

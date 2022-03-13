@@ -33,4 +33,6 @@ abstract class BaseKaryawanRepository {
     File file,
     String filePath,
   });
+  Future<bool> addGaji(GajiModel gaji);
+  Future<List<GajiModel>?> getGajiByKaryawanId(int karyawanId);
 }

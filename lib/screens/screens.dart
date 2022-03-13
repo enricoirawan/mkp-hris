@@ -13,3 +13,6 @@ export 'karyawan.dart';
 export 'detail_karyawan.dart';
 export 'add_karyawan.dart';
 export 'update_karyawan.dart';
+export 'input_gaji.dart';
+export 'riwayat_gaji_karyawan.dart';
+export 'input_gaji_form.dart';

@@ -45,7 +45,17 @@ class AuthRepository extends BaseAuthRepository {
         final prefs = await SharedPreferences.getInstance();
         prefs.setString("userToken", user.data!.persistSessionString);
 
-        return KaryawanModel.fromMap(responseList.first);
+        // return KaryawanModel.fromMap(responseList.first);
+        KaryawanModel karyawan = KaryawanModel.fromMap(responseList.first);
+
+        if (karyawan.active) {
+          return karyawan;
+        }
+
+        return KaryawanModel.initial().copyWith(
+          errorMessage:
+              "Status karyawan sudah tidak aktif, silahkan hubungi HR",
+        );
       } else {
         // * return nya bisa diganti null (opsional)
         return KaryawanModel.initial().copyWith(

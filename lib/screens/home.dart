@@ -122,24 +122,32 @@ class _HomeScreenState extends State<HomeScreen> {
                             ],
                           ),
                         ),
-                        Card(
-                          elevation: 10,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.asset("assets/tips.png"),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                "Slip Gaji",
-                                style: primaryTextStyle.copyWith(
-                                  letterSpacing: 1,
-                                  fontSize: 12,
+                        InkWell(
+                          onTap: () {
+                            Navigator.of(context).pushNamed(
+                              riwayatGajiPageRoute,
+                              arguments: state.karyawan,
+                            );
+                          },
+                          child: Card(
+                            elevation: 10,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset("assets/tips.png"),
+                                const SizedBox(
+                                  height: 10,
                                 ),
-                              )
-                            ],
+                                Text(
+                                  "Slip Gaji",
+                                  style: primaryTextStyle.copyWith(
+                                    letterSpacing: 1,
+                                    fontSize: 12,
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
                         ),
                         // InkWell(
@@ -229,26 +237,33 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ],
                                 ),
                               ),
-                              Card(
-                                elevation: 10,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Image.asset(
-                                      "assets/payroll.png",
-                                    ),
-                                    const SizedBox(
-                                      height: 10,
-                                    ),
-                                    Text(
-                                      "Input Gaji",
-                                      style: primaryTextStyle.copyWith(
-                                        letterSpacing: 1,
-                                        fontSize: 12,
+                              InkWell(
+                                onTap: () {
+                                  Navigator.of(context)
+                                      .pushNamed(inputGajiPageRoute);
+                                },
+                                child: Card(
+                                  elevation: 10,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset(
+                                        "assets/payroll.png",
                                       ),
-                                    )
-                                  ],
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      Text(
+                                        "Input Gaji",
+                                        style: primaryTextStyle.copyWith(
+                                          letterSpacing: 1,
+                                          fontSize: 12,
+                                        ),
+                                      )
+                                    ],
+                                  ),
                                 ),
                               ),
                               InkWell(

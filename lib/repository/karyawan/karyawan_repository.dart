@@ -363,4 +363,46 @@ class KaryawanRepository extends BaseKaryawanRepository {
       throw e.toString();
     }
   }
+
+  @override
+  Future<bool> addGaji(GajiModel gaji) async {
+    try {
+      PostgrestResponse response =
+          await _supabaseClient.from("Gaji").insert(gaji.toMap()).execute();
+
+      if (response.error == null) {
+        return true;
+      }
+
+      return false;
+    } catch (e) {
+      throw e.toString();
+    }
+  }
+
+  @override
+  Future<List<GajiModel>?> getGajiByKaryawanId(int karyawanId) async {
+    try {
+      PostgrestResponse response = await _supabaseClient
+          .from("Gaji")
+          .select()
+          .eq("karyawan_id", karyawanId)
+          .execute();
+
+      if (response.error == null) {
+        List responseData = response.data as List;
+        List<GajiModel> listGaji = [];
+
+        for (var element in responseData) {
+          listGaji.add(GajiModel.fromMap(element));
+        }
+
+        return listGaji;
+      }
+
+      return null;
+    } catch (e) {
+      throw e.toString();
+    }
+  }
 }
