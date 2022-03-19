@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:mkp_hris/model/cuti_model.dart';
 import 'package:mkp_hris/model/model.dart';
 
 abstract class BaseKaryawanRepository {
@@ -35,4 +36,14 @@ abstract class BaseKaryawanRepository {
   });
   Future<bool> addGaji(GajiModel gaji);
   Future<List<GajiModel>?> getGajiByKaryawanId(int karyawanId);
+  Future<bool> requestCuti(
+    String jenisCuti,
+    int karyawanId,
+    String alasan,
+    String startDate,
+    String endDate,
+    int durasiCuti,
+    String createdAt,
+  );
+  Future<List<CutiModel>?> getRequestCutiOnProsesByKaryawanId(int karyawanId);
 }

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:mkp_hris/model/cuti_model.dart';
 import 'package:mkp_hris/model/model.dart';
 import 'package:mkp_hris/utils/geolocator_helper.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -400,6 +401,67 @@ class KaryawanRepository extends BaseKaryawanRepository {
         return listGaji;
       }
 
+      return null;
+    } catch (e) {
+      throw e.toString();
+    }
+  }
+
+  @override
+  Future<bool> requestCuti(
+    String jenisCuti,
+    int karyawanId,
+    String alasan,
+    String startDate,
+    String endDate,
+    int durasiCuti,
+    String createdAt,
+  ) async {
+    try {
+      PostgrestResponse response = await _supabaseClient.from("Cuti").insert({
+        "jenis_cuti": jenisCuti,
+        "karyawan_id": karyawanId,
+        "alasan": alasan,
+        "start_date": startDate,
+        "end_date": endDate,
+        "durasi_cuti": durasiCuti,
+        "created_at": createdAt,
+      }).execute();
+
+      print(response.error);
+
+      if (response.error == null) {
+        return true;
+      }
+
+      return false;
+    } catch (e) {
+      throw e.toString();
+    }
+  }
+
+  @override
+  Future<List<CutiModel>?> getRequestCutiOnProsesByKaryawanId(
+    int karyawanId,
+  ) async {
+    try {
+      PostgrestResponse response = await _supabaseClient
+          .from("Cuti")
+          .select()
+          .eq("karyawan_id", karyawanId)
+          .eq("approved", false)
+          .execute();
+
+      if (response.error == null) {
+        List responseData = response.data as List;
+        List<CutiModel> listCuti = [];
+
+        for (var element in responseData) {
+          listCuti.add(CutiModel.fromMap(element));
+        }
+
+        return listCuti;
+      }
       return null;
     } catch (e) {
       throw e.toString();

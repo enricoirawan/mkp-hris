@@ -52,4 +52,11 @@ void setup() {
       ),
     ),
   );
+  getIt.registerLazySingleton(
+    () => CutiCubit(
+      karyawanRepository: KaryawanRepository(
+        supabaseClient: SupabaseClient(supabaseUrl, anonKey),
+      ),
+    ),
+  );
 }

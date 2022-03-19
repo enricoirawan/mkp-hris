@@ -16,3 +16,5 @@ export 'update_karyawan.dart';
 export 'input_gaji.dart';
 export 'riwayat_gaji_karyawan.dart';
 export 'input_gaji_form.dart';
+export 'ajukan_cuti.dart';
+export 'approval_cuti.dart';

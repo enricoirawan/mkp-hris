@@ -5,3 +5,4 @@ export 'karyawan/karyawan_cubit.dart';
 export 'absensi/absensi_cubit.dart';
 export 'pengumuman/pengumuman_cubit.dart';
 export 'gaji/gaji_cubit.dart';
+export 'cuti/cuti_cubit.dart';

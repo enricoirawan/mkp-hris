@@ -22,11 +22,11 @@ class _ProfilScreenState extends State<ProfilScreen> {
   final AuthCubit _authCubit = getIt<AuthCubit>();
 
   final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _namaController = TextEditingController();
   final TextEditingController _jabatanController = TextEditingController();
   final TextEditingController _alamatController = TextEditingController();
   final TextEditingController _npwpController = TextEditingController();
   final TextEditingController _noRekController = TextEditingController();
-  final TextEditingController _jatahCutiController = TextEditingController();
   final TextEditingController _tanggalBergabungController =
       TextEditingController();
 
@@ -217,6 +217,40 @@ class _ProfilScreenState extends State<ProfilScreen> {
                       child: TextFormField(
                         enabled: false,
                         keyboardType: TextInputType.text,
+                        controller: _namaController..text = karyawan.nama,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return '*Nama harus diisi';
+                          }
+                          return null;
+                        },
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(10),
+                            ),
+                            borderSide:
+                                BorderSide(color: kPrimaryColor, width: 2),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(10),
+                            ),
+                            borderSide: BorderSide(color: kRedColor, width: 2),
+                          ),
+                          errorStyle: redTextStyle,
+                          hintText: "Nama",
+                          label: const Text("Nama"),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 15),
+
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 15),
+                      child: TextFormField(
+                        enabled: false,
+                        keyboardType: TextInputType.text,
                         controller: _jabatanController..text = karyawan.jabatan,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
@@ -393,42 +427,7 @@ class _ProfilScreenState extends State<ProfilScreen> {
                       ),
                     ),
                     const SizedBox(height: 15),
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 15),
-                      child: TextFormField(
-                        enabled: false,
-                        keyboardType: TextInputType.text,
-                        controller: _jatahCutiController
-                          ..text = karyawan.jatahCuti.toString(),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return '*Tanggal bergabung harus diisi';
-                          } else if (!value.contains("@")) {
-                            return "*Tanggal bergabung tidak valid";
-                          }
-                          return null;
-                        },
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(10),
-                            ),
-                            borderSide:
-                                BorderSide(color: kPrimaryColor, width: 2),
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(10),
-                            ),
-                            borderSide: BorderSide(color: kRedColor, width: 2),
-                          ),
-                          errorStyle: redTextStyle,
-                          hintText: "Jatah Cuti",
-                          label: const Text("Jatah Cuti"),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 15),
+
                     // *End Info List
 
                     // *Start Button Action

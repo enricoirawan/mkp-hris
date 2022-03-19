@@ -102,24 +102,32 @@ class _HomeScreenState extends State<HomeScreen> {
                       crossAxisSpacing: 20,
                       crossAxisCount: state.karyawan.roleId == 3 ? 2 : 3,
                       children: [
-                        Card(
-                          elevation: 10,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.asset("assets/edit-calendar.png"),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                "Ajukan Cuti",
-                                style: primaryTextStyle.copyWith(
-                                  letterSpacing: 1,
-                                  fontSize: 12,
+                        InkWell(
+                          onTap: () {
+                            Navigator.of(context).pushNamed(
+                              ajukanCutiPageRoute,
+                              arguments: state.karyawan,
+                            );
+                          },
+                          child: Card(
+                            elevation: 10,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset("assets/edit-calendar.png"),
+                                const SizedBox(
+                                  height: 10,
                                 ),
-                              )
-                            ],
+                                Text(
+                                  "Pengajuan Cuti",
+                                  style: primaryTextStyle.copyWith(
+                                    letterSpacing: 1,
+                                    fontSize: 12,
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
                         ),
                         InkWell(
@@ -213,28 +221,37 @@ class _HomeScreenState extends State<HomeScreen> {
                             crossAxisSpacing: 20,
                             crossAxisCount: 3,
                             children: [
-                              Card(
-                                elevation: 10,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Image.asset(
-                                      "assets/ipproval.png",
-                                      width: 50,
-                                      height: 50,
-                                    ),
-                                    const SizedBox(
-                                      height: 10,
-                                    ),
-                                    Text(
-                                      "Approve Cuti",
-                                      style: primaryTextStyle.copyWith(
-                                        letterSpacing: 1,
-                                        fontSize: 12,
+                              InkWell(
+                                onTap: () {
+                                  Navigator.of(context).pushNamed(
+                                    approvalCutiPageRoute,
+                                    arguments: state.karyawan,
+                                  );
+                                },
+                                child: Card(
+                                  elevation: 10,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset(
+                                        "assets/ipproval.png",
+                                        width: 50,
+                                        height: 50,
                                       ),
-                                    )
-                                  ],
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      Text(
+                                        "Approval Cuti",
+                                        style: primaryTextStyle.copyWith(
+                                          letterSpacing: 1,
+                                          fontSize: 12,
+                                        ),
+                                      )
+                                    ],
+                                  ),
                                 ),
                               ),
                               InkWell(

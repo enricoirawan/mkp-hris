@@ -20,6 +20,8 @@ const String updateKaryawanPageRoute = "/updateKaryawan";
 const String inputGajiPageRoute = "/inputGaji";
 const String riwayatGajiPageRoute = "/riwayatGaji";
 const String inputGajiFormPageRoute = "/inputGajiForm";
+const String ajukanCutiPageRoute = "/ajukanCuti";
+const String approvalCutiPageRoute = "/approvalCuti";
 
 class RouterGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -144,6 +146,27 @@ class RouterGenerator {
 
         return PageTransition(
           child: InputgajiFormScreen(karyawan: karyawanArgument),
+          type: PageTransitionType.fade,
+        );
+
+      case ajukanCutiPageRoute:
+        final KaryawanModel karyawanArgument =
+            settings.arguments as KaryawanModel;
+        return PageTransition(
+          child: AjukanCutiScreen(
+            karyawan: karyawanArgument,
+          ),
+          type: PageTransitionType.fade,
+        );
+
+      case approvalCutiPageRoute:
+        final KaryawanModel karyawanArgument =
+            settings.arguments as KaryawanModel;
+
+        return PageTransition(
+          child: ApprovalCutiScreen(
+            karyawan: karyawanArgument,
+          ),
           type: PageTransitionType.fade,
         );
 

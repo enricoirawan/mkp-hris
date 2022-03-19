@@ -86,6 +86,9 @@ class MyApp extends StatelessWidget {
         BlocProvider<GajiCubit>(
           create: (_) => getIt.get<GajiCubit>(),
         ),
+        BlocProvider<CutiCubit>(
+          create: (_) => getIt.get<CutiCubit>(),
+        ),
       ],
       child: MaterialApp(
         title: 'MKP - HRIS',

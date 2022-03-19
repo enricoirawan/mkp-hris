@@ -16,3 +16,4 @@ export 'package:file_picker/file_picker.dart';
 export 'package:url_launcher/url_launcher.dart';
 export 'package:rflutter_alert/rflutter_alert.dart';
 export 'package:select_form_field/select_form_field.dart';
+export 'package:percent_indicator/percent_indicator.dart';
