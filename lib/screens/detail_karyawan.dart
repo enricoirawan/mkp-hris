@@ -97,6 +97,15 @@ class DetailKaryawanScreen extends StatelessWidget {
               },
               icon: const Icon(Icons.edit),
             ),
+            IconButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed(
+                  dataRiwayatKaryawanPageRoute,
+                  arguments: karyawan,
+                );
+              },
+              icon: const Icon(Icons.info),
+            ),
           ],
         ),
         body: Container(

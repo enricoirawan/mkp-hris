@@ -18,3 +18,6 @@ export 'riwayat_gaji_karyawan.dart';
 export 'input_gaji_form.dart';
 export 'ajukan_cuti.dart';
 export 'approval_cuti.dart';
+export 'riwayat_cuti.dart';
+export 'riwayat_absen.dart';
+export 'data_riwayat_karyawan.dart';

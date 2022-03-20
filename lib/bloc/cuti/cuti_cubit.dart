@@ -79,4 +79,113 @@ class CutiCubit extends Cubit<CutiState> {
       );
     }
   }
+
+  void getRequestCuti() async {
+    try {
+      emit(CutiLoading());
+
+      List<CutiModel>? listCuti = await _karyawanRepository.getRequestCuti();
+
+      if (listCuti != null) {
+        emit(GetListCutiSuccess(listCuti: listCuti));
+      } else {
+        emit(
+          const GetListCutiFailed(
+            errorMessage:
+                "Gagal mengambil data permintaan cuti, silahkan coba lagi",
+          ),
+        );
+      }
+    } catch (e) {
+      emit(
+        const GetListCutiFailed(
+          errorMessage: "Terjadi kesalahan, silahkan coba lagi",
+        ),
+      );
+    }
+  }
+
+  void rejectRequestCuti(int id, String rejectedBy) async {
+    try {
+      emit(CutiLoading());
+
+      bool isRejectRequestCutiSuccess =
+          await _karyawanRepository.rejectRequestCuti(id, rejectedBy);
+
+      if (isRejectRequestCutiSuccess) {
+        emit(
+          const RejectRequestCutiSuccess(
+            message: "Penolakan permintaan cuti telah berhasil",
+          ),
+        );
+      } else {
+        emit(
+          const RejectRequestCutiFailed(
+            errorMessage: "Penolakan permintaan cuti gagal, silahkan coba lagi",
+          ),
+        );
+      }
+    } catch (e) {
+      emit(
+        const RejectRequestCutiFailed(
+          errorMessage: "Terjadi kesalahan, silahkan coba lagi",
+        ),
+      );
+    }
+  }
+
+  void approveRequestCuti(int id, int karyawanId, String approvedBy) async {
+    try {
+      emit(CutiLoading());
+
+      bool isApproveRequestCutiSuccess = await _karyawanRepository
+          .approveRequestCuti(id, karyawanId, approvedBy);
+
+      if (isApproveRequestCutiSuccess) {
+        emit(
+          const ApproveRequestCutiSuccess(
+            message: "Approval permintaan cuti telah berhasil",
+          ),
+        );
+      } else {
+        emit(
+          const ApproveRequestCutiFailed(
+            errorMessage: "Approval permintaan cuti gagal, silahkan coba lagi",
+          ),
+        );
+      }
+    } catch (e) {
+      emit(
+        const ApproveRequestCutiFailed(
+          errorMessage: "Terjadi kesalahan, silahkan coba lagi",
+        ),
+      );
+    }
+  }
+
+  void getHistoryCutiByKaryawanId(int karyawanId) async {
+    try {
+      emit(CutiLoading());
+
+      List<CutiModel>? listCuti =
+          await _karyawanRepository.getHistoryCutiByKaryawanId(karyawanId);
+
+      if (listCuti != null) {
+        emit(GetListCutiSuccess(listCuti: listCuti));
+      } else {
+        emit(
+          const GetListCutiFailed(
+            errorMessage:
+                "Gagal mengambil data riwayat cuti, silahkan coba lagi",
+          ),
+        );
+      }
+    } catch (e) {
+      emit(
+        const GetListCutiFailed(
+          errorMessage: "Terjadi kesalahan, silahkan coba lagi",
+        ),
+      );
+    }
+  }
 }

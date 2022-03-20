@@ -58,7 +58,6 @@ dependencies:
   url_launcher: ^6.0.20
   rflutter_alert: ^2.0.4
   select_form_field: ^2.2.0
-  percent_indicator: ^4.0.0
 
 dev_dependencies:
   flutter_test:

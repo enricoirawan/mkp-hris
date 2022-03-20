@@ -232,6 +232,32 @@ class KaryawanRepository extends BaseKaryawanRepository {
   }
 
   @override
+  Future<List<AbsensiModel>?> getHistoryAbsensi(int karyawanId) async {
+    try {
+      final PostgrestResponse response = await _supabaseClient
+          .from("Absensi")
+          .select()
+          .eq("id_karyawan", karyawanId)
+          .execute();
+
+      if (response.error == null) {
+        final responseData = response.data as List;
+        List<AbsensiModel> listAbsen = [];
+
+        for (var element in responseData) {
+          listAbsen.add(AbsensiModel.fromMap(element));
+        }
+
+        return listAbsen;
+      }
+
+      return null;
+    } catch (e) {
+      throw e.toString();
+    }
+  }
+
+  @override
   Future<bool> checkIn(
     int karyawanid,
     String waktuCheckIn,
@@ -428,8 +454,6 @@ class KaryawanRepository extends BaseKaryawanRepository {
         "created_at": createdAt,
       }).execute();
 
-      print(response.error);
-
       if (response.error == null) {
         return true;
       }
@@ -449,7 +473,7 @@ class KaryawanRepository extends BaseKaryawanRepository {
           .from("Cuti")
           .select()
           .eq("karyawan_id", karyawanId)
-          .eq("approved", false)
+          .eq("status", "on proses")
           .execute();
 
       if (response.error == null) {
@@ -462,6 +486,135 @@ class KaryawanRepository extends BaseKaryawanRepository {
 
         return listCuti;
       }
+      return null;
+    } catch (e) {
+      throw e.toString();
+    }
+  }
+
+  @override
+  Future<List<CutiModel>?> getRequestCuti() async {
+    try {
+      PostgrestResponse response = await _supabaseClient
+          .from("Cuti")
+          .select('*, Karyawan!inner(nama)')
+          .eq("status", "on proses")
+          .execute();
+
+      if (response.error == null) {
+        List responseData = response.data as List;
+        List<CutiModel> listCuti = [];
+
+        for (var element in responseData) {
+          listCuti.add(CutiModel.fromMap(element));
+        }
+
+        return listCuti;
+      }
+
+      return null;
+    } catch (e) {
+      throw e.toString();
+    }
+  }
+
+  @override
+  Future<bool> rejectRequestCuti(int id, String rejectedBy) async {
+    try {
+      PostgrestResponse response = await _supabaseClient
+          .from("Cuti")
+          .update({
+            "rejected_by": rejectedBy,
+            "status": "rejected",
+          })
+          .eq("id", id)
+          .execute();
+
+      if (response.error == null) {
+        return true;
+      }
+
+      return false;
+    } catch (e) {
+      throw e.toString();
+    }
+  }
+
+  @override
+  Future<bool> approveRequestCuti(
+      int id, int karyawanId, String approvedBy) async {
+    try {
+      PostgrestResponse response = await _supabaseClient
+          .from("Cuti")
+          .update({
+            "approved": true,
+            "approved_by": approvedBy,
+            "status": "approved",
+          })
+          .eq("id", id)
+          .execute();
+
+      PostgrestResponse getDurasiCutiResponse = await _supabaseClient
+          .from("Cuti")
+          .select("durasi_cuti")
+          .eq("id", id)
+          .execute();
+
+      PostgrestResponse getJatahCutiResponse = await _supabaseClient
+          .from("Karyawan")
+          .select("jatah_cuti")
+          .eq("id", karyawanId)
+          .execute();
+
+      if (response.error == null &&
+          getDurasiCutiResponse.error == null &&
+          getJatahCutiResponse.error == null) {
+        int durasiCuti = getDurasiCutiResponse.data[0]["durasi_cuti"];
+        int jatahCuti = getJatahCutiResponse.data[0]["jatah_cuti"];
+
+        int sisaCuti = jatahCuti - durasiCuti;
+
+        PostgrestResponse updateJatahCutiResponse = await _supabaseClient
+            .from("Karyawan")
+            .update({
+              "jatah_cuti": sisaCuti < 0 ? 0 : sisaCuti,
+            })
+            .eq("id", karyawanId)
+            .execute();
+
+        if (updateJatahCutiResponse.error == null) {
+          return true;
+        }
+
+        return false;
+      }
+
+      return false;
+    } catch (e) {
+      throw e.toString();
+    }
+  }
+
+  @override
+  Future<List<CutiModel>?> getHistoryCutiByKaryawanId(int karyawanId) async {
+    try {
+      PostgrestResponse response = await _supabaseClient
+          .from("Cuti")
+          .select('*, Karyawan!inner(nama)')
+          .eq("karyawan_id", karyawanId)
+          .execute();
+
+      if (response.error == null) {
+        List responseData = response.data as List;
+        List<CutiModel> listCuti = [];
+
+        for (var element in responseData) {
+          listCuti.add(CutiModel.fromMap(element));
+        }
+
+        return listCuti;
+      }
+
       return null;
     } catch (e) {
       throw e.toString();

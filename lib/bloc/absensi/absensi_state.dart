@@ -71,3 +71,21 @@ class CheckOutFailed extends AbsensiState {
   @override
   List<Object> get props => [errorMessage];
 }
+
+class GetListAbsensiSuccess extends AbsensiState {
+  final List<AbsensiModel> listAbsen;
+
+  const GetListAbsensiSuccess({required this.listAbsen});
+
+  @override
+  List<Object> get props => [listAbsen];
+}
+
+class GetListAbsensiFailed extends AbsensiState {
+  final String errorMessage;
+
+  const GetListAbsensiFailed({required this.errorMessage});
+
+  @override
+  List<Object> get props => [errorMessage];
+}

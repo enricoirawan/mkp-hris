@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mkp_hris/bloc/auth/auth_cubit.dart';
 import 'package:mkp_hris/bloc/bloc.dart';
 import 'package:mkp_hris/injection.dart';
-import 'package:mkp_hris/model/karyawan_model.dart';
 import 'package:mkp_hris/model/model.dart';
 import 'package:mkp_hris/router.dart';
 

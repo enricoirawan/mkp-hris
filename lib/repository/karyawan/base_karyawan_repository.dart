@@ -15,6 +15,7 @@ abstract class BaseKaryawanRepository {
   Future<Map<String, dynamic>> getKaryawanByEmailForResetPassword(String email);
   Future<String?> getPosition();
   Future<List?> getTodayAbsensi(String date, int karyawanId);
+  Future<List<AbsensiModel>?> getHistoryAbsensi(int karyawanId);
   Future<bool> checkIn(
     int karyawanid,
     String waktuCheckIn,
@@ -46,4 +47,8 @@ abstract class BaseKaryawanRepository {
     String createdAt,
   );
   Future<List<CutiModel>?> getRequestCutiOnProsesByKaryawanId(int karyawanId);
+  Future<List<CutiModel>?> getRequestCuti();
+  Future<bool> rejectRequestCuti(int id, String rejectedBy);
+  Future<bool> approveRequestCuti(int id, int karyawanId, String approvedBy);
+  Future<List<CutiModel>?> getHistoryCutiByKaryawanId(int karyawanId);
 }

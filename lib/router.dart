@@ -22,6 +22,9 @@ const String riwayatGajiPageRoute = "/riwayatGaji";
 const String inputGajiFormPageRoute = "/inputGajiForm";
 const String ajukanCutiPageRoute = "/ajukanCuti";
 const String approvalCutiPageRoute = "/approvalCuti";
+const String riwayatCutiPageRoute = "/riwayatCuti";
+const String riwayatAbsenPageRoute = "/riwayatAbsen";
+const String dataRiwayatKaryawanPageRoute = "/dataRiwayatKaryawan";
 
 class RouterGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -76,6 +79,28 @@ class RouterGenerator {
           type: PageTransitionType.leftToRight,
         );
 
+      case riwayatCutiPageRoute:
+        final int karyawanIdArgument = settings.arguments as int;
+
+        return PageTransition(
+          child: RiwayatCutiScreen(
+            karyawanId: karyawanIdArgument,
+            showAppBar: true,
+          ),
+          type: PageTransitionType.leftToRight,
+        );
+
+      case riwayatAbsenPageRoute:
+        final int karyawanIdArgument = settings.arguments as int;
+
+        return PageTransition(
+          child: RiwayatAbsenScreen(
+            karyawanId: karyawanIdArgument,
+            showAppBar: true,
+          ),
+          type: PageTransitionType.leftToRight,
+        );
+
       case detailPengumumanPageRoute:
         final PengumumanModel pengumumanModelArgument =
             settings.arguments as PengumumanModel;
@@ -113,6 +138,15 @@ class RouterGenerator {
       case addKaryawanPageRoute:
         return PageTransition(
           child: const AddKaryawanScreen(),
+          type: PageTransitionType.fade,
+        );
+
+      case dataRiwayatKaryawanPageRoute:
+        final KaryawanModel karyawanArgument =
+            settings.arguments as KaryawanModel;
+
+        return PageTransition(
+          child: DataRiwayatKaryawanScreen(karyawan: karyawanArgument),
           type: PageTransitionType.fade,
         );
 

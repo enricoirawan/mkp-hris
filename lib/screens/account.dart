@@ -158,28 +158,80 @@ class AccountScreen extends StatelessWidget {
               const Divider(),
 
               // *START Riwayat Cuti
-              InkWell(
-                onTap: () {},
-                child: Container(
-                  padding: const EdgeInsets.all(15),
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.file_copy,
-                        color: kPrimaryColor,
+              BlocBuilder<AuthCubit, AuthState>(
+                builder: (context, state) {
+                  if (state is AuthSuccess) {
+                    int karyawanId = state.karyawan.id;
+                    return InkWell(
+                      onTap: () {
+                        Navigator.of(context).pushNamed(
+                          riwayatCutiPageRoute,
+                          arguments: karyawanId,
+                        );
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.all(15),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.file_copy,
+                              color: kPrimaryColor,
+                            ),
+                            const SizedBox(
+                              width: 15,
+                            ),
+                            Text(
+                              "Riwayat Cuti Saya",
+                              style: blackTextStyle,
+                            )
+                          ],
+                        ),
                       ),
-                      const SizedBox(
-                        width: 15,
-                      ),
-                      Text(
-                        "Riwayat Cuti Saya",
-                        style: blackTextStyle,
-                      )
-                    ],
-                  ),
-                ),
+                    );
+                  }
+                  return Container();
+                },
               ),
               // *END Riwayat Cuti
+
+              const Divider(),
+
+              // *START Riwayat Absen
+              BlocBuilder<AuthCubit, AuthState>(
+                builder: (context, state) {
+                  if (state is AuthSuccess) {
+                    int karyawanId = state.karyawan.id;
+                    return InkWell(
+                      onTap: () {
+                        Navigator.of(context).pushNamed(
+                          riwayatAbsenPageRoute,
+                          arguments: karyawanId,
+                        );
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.all(15),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.history,
+                              color: kPrimaryColor,
+                            ),
+                            const SizedBox(
+                              width: 15,
+                            ),
+                            Text(
+                              "Riwayat Absen Saya",
+                              style: blackTextStyle,
+                            )
+                          ],
+                        ),
+                      ),
+                    );
+                  }
+                  return Container();
+                },
+              ),
+              // *END Riwayat Absen
 
               const Divider(),
 

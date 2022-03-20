@@ -46,3 +46,39 @@ class GetListCutiFailed extends CutiState {
   @override
   List<Object> get props => [errorMessage];
 }
+
+class RejectRequestCutiSuccess extends CutiState {
+  final String message;
+
+  const RejectRequestCutiSuccess({required this.message});
+
+  @override
+  List<Object> get props => [message];
+}
+
+class RejectRequestCutiFailed extends CutiState {
+  final String errorMessage;
+
+  const RejectRequestCutiFailed({required this.errorMessage});
+
+  @override
+  List<Object> get props => [errorMessage];
+}
+
+class ApproveRequestCutiSuccess extends CutiState {
+  final String message;
+
+  const ApproveRequestCutiSuccess({required this.message});
+
+  @override
+  List<Object> get props => [message];
+}
+
+class ApproveRequestCutiFailed extends CutiState {
+  final String errorMessage;
+
+  const ApproveRequestCutiFailed({required this.errorMessage});
+
+  @override
+  List<Object> get props => [errorMessage];
+}

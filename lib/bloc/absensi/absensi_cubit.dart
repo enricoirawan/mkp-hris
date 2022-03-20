@@ -115,4 +115,30 @@ class AbsensiCubit extends Cubit<AbsensiState> {
       );
     }
   }
+
+  void getHistoryAbsensi(int karyawanId) async {
+    try {
+      emit(AbsensiLoading());
+
+      final List<AbsensiModel>? listAbsen =
+          await _karyawanRepository.getHistoryAbsensi(karyawanId);
+
+      if (listAbsen != null) {
+        emit(GetListAbsensiSuccess(listAbsen: listAbsen));
+      } else {
+        emit(
+          const GetListAbsensiFailed(
+            errorMessage:
+                "Gagal mengambil data riwayat absen, silahkan coba lagi",
+          ),
+        );
+      }
+    } catch (e) {
+      emit(
+        const GetListAbsensiFailed(
+          errorMessage: "Terjadi kesalahan, silahkan coba lagi",
+        ),
+      );
+    }
+  }
 }

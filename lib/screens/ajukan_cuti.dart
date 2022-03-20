@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:mkp_hris/bloc/bloc.dart';
 import 'package:mkp_hris/injection.dart';
@@ -68,22 +66,52 @@ class _AjukanCutiScreenState extends State<AjukanCutiScreen> {
   void _onSubmit() {
     if (_formKey.currentState!.validate()) {
       String startDateString = _startDateController.text;
-      List<String> splitStartDateString = startDateString.split("-");
-      int startDate = int.parse(splitStartDateString[2]);
-      String endDateString = _startDateController.text;
-      List<String> splitEndDateString = endDateString.split("-");
-      int endDate = int.parse(splitEndDateString[2]);
-      int durasiCuti = (endDate - startDate) + 1;
+      String endDateString = _endDateController.text;
+      DateTime startDate = DateTime.parse(startDateString);
+      DateTime endDate = DateTime.parse(endDateString);
+      int durasiCuti = endDate.difference(startDate).inDays + 2;
 
-      _cutiCubit.requestCuti(
-        _jenisCutiController.text,
-        widget.karyawan.id,
-        _alasanController.text,
-        _startDateController.text,
-        _endDateController.text,
-        durasiCuti,
-        DateTime.now().toString(),
-      );
+      if (durasiCuti > jatahCuti) {
+        Alert(
+          context: context,
+          type: AlertType.warning,
+          title: "Peringatan",
+          desc:
+              "Durasi cuti melebihi sisa cuti, hubungi HR untuk mendapat persetujuan cuti diluar jatah cuti",
+          buttons: [
+            DialogButton(
+              height: 50,
+              child: Text(
+                "Saya sudah dapat persetujuan",
+                style: whiteTextStyle,
+              ),
+              onPressed: () {
+                _cutiCubit.requestCuti(
+                  _jenisCutiController.text,
+                  widget.karyawan.id,
+                  _alasanController.text,
+                  _startDateController.text,
+                  _endDateController.text,
+                  durasiCuti,
+                  DateTime.now().toString(),
+                );
+              },
+              width: 120,
+              color: kRedColor,
+            ),
+            DialogButton(
+              height: 50,
+              child: Text(
+                "Baik",
+                style: whiteTextStyle,
+              ),
+              onPressed: () => Navigator.pop(context),
+              width: 120,
+              color: kPrimaryColor,
+            ),
+          ],
+        ).show();
+      }
     }
   }
 
