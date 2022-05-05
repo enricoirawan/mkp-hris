@@ -116,7 +116,7 @@ class CutiModel extends Equatable {
       endDate: map['end_date'] ?? '',
       createdAt: map['created_at'] ?? '',
       durasiCuti: map['durasi_cuti']?.toInt() ?? 0,
-      nama: map['Karyawan']['nama'] ?? '',
+      nama: map['Karyawan'] == null ? "" : map['Karyawan']['nama'] ?? '',
     );
   }
 

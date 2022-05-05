@@ -111,6 +111,16 @@ class _AjukanCutiScreenState extends State<AjukanCutiScreen> {
             ),
           ],
         ).show();
+      } else {
+        _cutiCubit.requestCuti(
+          _jenisCutiController.text,
+          widget.karyawan.id,
+          _alasanController.text,
+          _startDateController.text,
+          _endDateController.text,
+          durasiCuti,
+          DateTime.now().toString(),
+        );
       }
     }
   }
