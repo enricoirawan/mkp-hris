@@ -43,7 +43,7 @@ class AuthCubit extends Cubit<AuthState> with HydratedMixin {
       emit(
         const AuthFailed(
           errorModel: ErrorModel(
-            errorMessage: "Terjadi kesalahan, silahkan coba lagi",
+            errorMessage: "Terjadi Kesalahan, silahkan coba kembali",
           ),
         ),
       );
